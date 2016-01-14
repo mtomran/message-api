@@ -1,0 +1,29 @@
+node:
+  build: ../node/
+  environment:
+    - NODE_ENV=production
+  links: 
+    - mongo
+    - redis   
+  ports:
+    - "8000:8000"
+  restart: always
+  
+redis:
+  image: redis
+  hostname: redis
+  volumes: 
+    - /data/redis:/data
+  ports:
+    - "6379:6379"
+  restart: always
+
+mongo:
+  image: tutum/mongodb
+  environment:
+    - MONGODB_PASS=secret 
+  volumes:
+    - /data/mongodb:/data/db
+  ports: 
+    - "27017:27017"
+  restart: always
