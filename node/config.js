@@ -12,5 +12,11 @@ module.exports= {
 	token: {
 		expiry: 7,	//in days
 		secret: "jwt.secret.message"	
+	},
+	masterUser: {
+		username: "admin",
+		password: "secret",
+		first_name: "Administrator",
+		last_name: "Master"
 	}
 };

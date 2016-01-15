@@ -30,7 +30,7 @@ module.exports = function(){
 	fs
 	.readdirSync(normalizedPath)
 	.forEach(function(file) {
-		if (file == "index.js") return;
+		if (file == "index.js" || path.extname(file)!=".js") return;
 		
 		var model= require("./"+file);
 		db= _.merge(db, model);

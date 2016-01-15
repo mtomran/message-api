@@ -1,7 +1,10 @@
 /* global global */
 /* global config */
 global.config = require("./config.js");
-global.db = require("./models/mongo")();
+global.utils= require("./lib/utils.js");
+global.db = require("./models")();
+var dbUser= require("./db/db_user.js");
+dbUser.addMasterUser();
 
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -20,7 +23,7 @@ var socket = require("./lib/socket.js");
 socket.init(io);
 
 server.listen(config.api.port, function () {
-	log.info("The Messaging REST API started on port " + config.api.port);
+	console.log("The Messaging REST API started on port " + config.api.port);
 });
 
 
