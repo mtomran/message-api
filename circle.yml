@@ -8,4 +8,4 @@ dependencies:
 
 test:
   override:
-    - docker run -i docker_node_1 npm test
+    - docker exec -i docker_node_1 npm test
