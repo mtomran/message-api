@@ -4,6 +4,7 @@ machine:
 
 dependencies:
   pre:
+    - cd docker
     - docker-compose build
     - docker-compoose up -d  
 
