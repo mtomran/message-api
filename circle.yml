@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   override:
-    - cd docker && docker-compose build && docker-compoose up -d  
+    - cd docker && docker-compose build && docker-compose up -d  
 
 test:
   override:
