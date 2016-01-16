@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   override:
-    - cd docker && docker-compose build && docker-compose up -d --no-deps node mongo
+    - cd docker && docker-compose build && docker-compose up -d --no-deps node
 
 test:
   override:
