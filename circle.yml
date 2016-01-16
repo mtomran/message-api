@@ -3,11 +3,9 @@ machine:
     - docker
 
 dependencies:
-  pre:
-    - cd docker
-    - docker-compose build
-    - docker-compoose up -d  
+  override:
+    - cd docker && docker-compose build && docker-compoose up -d  
 
 test:
-  post:
+  override:
     - docker run -i docker_node_1 npm test
