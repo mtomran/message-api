@@ -4,9 +4,9 @@ machine:
 
 dependencies:
   pre:
-  	- docker-compose build
-	- docker-compoose up -d  
+    - docker-compose build
+    - docker-compoose up -d  
 
 test:
   post:
-  	- docker run -i docker_node_1 npm test
+    - docker run -i docker_node_1 npm test
