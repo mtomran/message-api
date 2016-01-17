@@ -1,7 +1,5 @@
 node:
   build: ../node/
-  environment:
-    - NODE_ENV=production
   links: 
     - mongodb
     - redis   
