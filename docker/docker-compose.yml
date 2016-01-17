@@ -3,7 +3,7 @@ node:
   environment:
     - NODE_ENV=production
   links: 
-    - mongo
+    - mongodb
     - redis   
   ports:
     - "8000:8000"
