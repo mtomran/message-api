@@ -1,8 +1,11 @@
 machine:
   services:
-    - docker
-
+    node:
+      verion: 0.12.7
+    
+dependencies:
+  override:
+    - cd node; npm install
 test:
   override:
-    - cd docker; docker-compose up -d --no-deps node
     - cd node; npm test
