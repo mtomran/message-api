@@ -1,9 +1,10 @@
 machine:
-    node:
-      version: 0.12.7
-      environment:
-        mongodb: 127.0.0.1
-        redis: 127.0.0.1
+  environment:
+    mongodb: 127.0.0.1
+    redis: 127.0.0.1
+  node:
+    version: 0.12.7
+      
     
 dependencies:
   override:
