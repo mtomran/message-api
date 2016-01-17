@@ -18,7 +18,7 @@ redis:
     - "6379:6379"
   restart: always
 
-mongo:
+mongodb:
   image: tutum/mongodb
   environment:
     - MONGODB_PASS=secret 
