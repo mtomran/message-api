@@ -23,6 +23,7 @@ var server = http.createServer(app);
 var io = require("socket.io")(server);
 var socket = require("./lib/socket.js");
 socket.init(io);
+
 dbUser.addMasterUser()
 .then(function(){
 	server.listen(config.api.port, function () {
