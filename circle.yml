@@ -1,5 +1,5 @@
 machine:
-  environment:
+  hosts:
     mongodb: 127.0.0.1
     redis: 127.0.0.1
   node:
