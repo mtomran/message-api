@@ -1,3 +1,4 @@
 --require test/common
 --recursive
 --reporter spec
+--timeout 5000

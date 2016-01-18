@@ -15,8 +15,7 @@ before(function (done) {
 			return userTest.postUser(adminToken);	
 		}).then(function(){
 			done();
-		});
-        
+		});        
     });
 	
 });
