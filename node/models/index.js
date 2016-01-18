@@ -22,7 +22,7 @@ module.exports = function(){
 	
 	connString= util.format("mongodb://localhost/message");
 	
-	mongoose.connect(connString);
+	mongoose.connect(connString );
 	
 	
 	var fs= require("fs");
