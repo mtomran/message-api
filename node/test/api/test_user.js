@@ -1,7 +1,8 @@
 "use strict";
 /* global describe it expect*/
 var bluebird= require("bluebird");
-var app = "http://localhost:" + config.api.port;
+//var app = "http://localhost:" + config.api.port;
+var app= require("../../app").app;
 
 var request = chai.request;
 //var now = Math.round(new Date().getTime() / 1000);

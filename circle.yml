@@ -9,7 +9,5 @@ dependencies:
   override:
     - cd node; npm install
 test:
-  pre: 
-    - cd node; node app.js
   override:
     - cd node; npm test

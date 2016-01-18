@@ -1,7 +1,8 @@
 "use strict";
 /* global before describe it expect chai*/
 
-var app = "http://localhost:" + config.api.port;
+//var app = "http://localhost:" + config.api.port;
+var app= require("../../app").app;
 
 var request = chai.request;
 var userTest= require("./test_user.js");
