@@ -11,4 +11,4 @@ dependencies:
     - cd node; npm install
 test:
   override:
-    - cd node; npm test
+    - cd node; node app.js; npm test
