@@ -1,4 +1,7 @@
 machine:
+  environment:
+    MONGODB_USER: ""
+    MONGODB_PASS: ""
   hosts:
     mongodb: 127.0.0.1
     redis: 127.0.0.1

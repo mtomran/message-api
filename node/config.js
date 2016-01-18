@@ -14,8 +14,8 @@ module.exports= {
 		secret: "jwt.secret.message"	
 	},
 	masterUser: {
-		username: "admin",
-		password: "secret",
+		username: process.env.MONGODB_USER || "admin",
+		password: process.env.MONGODB_PASS || "secret",
 		first_name: "Administrator",
 		last_name: "Master"
 	}
