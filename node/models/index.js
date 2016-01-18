@@ -20,10 +20,10 @@ module.exports = function(){
 		config.mongo.user
 	);
 	
-	mongoose.connect(connString, options);
+	//mongoose.connect(connString, options);
 	
-	//connString= util.format("mongodb://localhost/message");
-	//mongoose.connect(connString);
+	connString= util.format("mongodb://localhost/message");
+	mongoose.connect(connString);
 	
 	
 	
