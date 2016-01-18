@@ -4,7 +4,7 @@ module.exports= {
 		port: 8000
 	},	
 	mongo: {
-		host: "mongodb",
+		host: "127.0.0.1",//"mongodb",
 		user: process.env.MONGODB_USER || "",
 		pass: process.env.MONGODB_PASS || "",
 		database: "message"
