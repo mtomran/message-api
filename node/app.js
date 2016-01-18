@@ -3,6 +3,8 @@
 global.config = require("./config.js");
 global.utils= require("./lib/utils.js");
 global.db = require("./models")();
+
+console.log("*********", config);
 var dbUser= require("./db/db_user.js");
 dbUser.addMasterUser();
 
