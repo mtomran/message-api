@@ -5,8 +5,8 @@ module.exports= {
 	},	
 	mongo: {
 		host: "mongodb",
-		user: process.env.MONGODB_USER || "admin",
-		pass: process.env.MONGODB_PASS || "secret",
+		user: process.env.MONGODB_USER || "",
+		pass: process.env.MONGODB_PASS || "",
 		database: "message"
 	},
 	token: {

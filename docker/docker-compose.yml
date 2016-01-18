@@ -19,6 +19,7 @@ redis:
 mongodb:
   image: tutum/mongodb
   environment:
+    - MONGODB_USER=admin
     - MONGODB_PASS=secret 
   volumes:
     - /data/mongodb:/data/db
