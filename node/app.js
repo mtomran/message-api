@@ -6,7 +6,7 @@ global.db = require("./models")();
 
 console.log("*********", config);
 var dbUser= require("./db/db_user.js");
-dbUser.addMasterUser();
+
 
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -23,10 +23,12 @@ var server = http.createServer(app);
 var io = require("socket.io")(server);
 var socket = require("./lib/socket.js");
 socket.init(io);
-
-server.listen(config.api.port, function () {
-	console.log("The Messaging REST API started on port " + config.api.port);
-});
+dbUser.addMasterUser()
+.then(function(){
+	server.listen(config.api.port, function () {
+		console.log("The Messaging REST API started on port " + config.api.port);
+	});	
+})
 
 
 blacklist.configure({

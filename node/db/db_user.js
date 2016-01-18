@@ -3,7 +3,7 @@ var bluebird= require("bluebird");
 var bcrypt= require("bcrypt");
 
 function addMasterUser(){
-	postUser(config.masterUser);	
+	return postUser(config.masterUser);	
 }
 
 
