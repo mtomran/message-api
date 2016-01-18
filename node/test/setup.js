@@ -7,16 +7,19 @@ var app= require("../app").app;
 
 // These hooks/handlers are attached to the root suite, 
 // as such, they will be run before and after *ALL* the tests
-before(function (done) {
+before(function () {
 	console.log("Before All tests");
-	app.on("listening", function() {
-        return userTest.loginMasterUser()
-		.then(function(adminToken){
-			return userTest.postUser(adminToken);	
-		}).then(function(){
-			done();
-		});        
-    });
+	return new Promise(function(resovle, reject){
+		app.on("listening", function() {
+			return userTest.loginMasterUser()
+			.then(function(adminToken){
+				return userTest.postUser(adminToken);	
+			}).then(function(){
+				resovle();
+			});        
+		});
+	})
+	
 	
 });
 
