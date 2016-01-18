@@ -11,14 +11,16 @@ before(function () {
 	console.log("Before All tests");
 	return new Promise(function(resovle, reject){
 		app.on("listening", function() {
-			return userTest.loginMasterUser()
-			.then(function(adminToken){
-				return userTest.postUser(adminToken);	
-			}).then(function(){
-				resovle();
-			});        
+			resolve();
 		});
 	})
+	.then(function(){
+		return userTest.loginMasterUser()
+		.then(function(adminToken){
+			return userTest.postUser(adminToken);	
+		});        
+	});
+	
 	
 	
 });
