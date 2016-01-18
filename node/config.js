@@ -5,8 +5,8 @@ module.exports= {
 	},	
 	mongo: {
 		host: "mongodb",
-		user: "admin",
-		pass: "secret",
+		user: process.env.MONGODB_USER || "admin",
+		pass: process.env.MONGODB_PASS || "secret",
 		database: "message"
 	},
 	token: {
@@ -14,8 +14,8 @@ module.exports= {
 		secret: "jwt.secret.message"	
 	},
 	masterUser: {
-		username: process.env.MONGODB_USER || "admin",
-		password: process.env.MONGODB_PASS || "secret",
+		username: "admin",
+		password: "secret",
 		first_name: "Administrator",
 		last_name: "Master"
 	}
