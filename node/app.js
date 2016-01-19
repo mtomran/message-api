@@ -5,7 +5,7 @@ global.utils= require("./lib/utils.js");
 global.db = require("./models")();
 
 var dbUser= require("./db/db_user.js");
-//dbUser.addMasterUser();
+dbUser.addMasterUser();
 
 var express = require("express");
 var bodyParser = require("body-parser");
