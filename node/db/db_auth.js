@@ -6,12 +6,12 @@ var bcrypt= require("bcrypt");
 
 function authLogin(loginInfo){
 	return queryUser(loginInfo)	
-	.then(function(login){
-		if(login){
-			var tokenStr= token.genToken(login);
-			var message= "User "+ login.username+ " login successful.";
+	.then(function(user){
+		if(user){
+			var tokenStr= token.genToken(user);
+			var message= "User "+ user.username+ " login successful.";
 			console.log(message);			
-			return bluebird.resolve({ message: message, token: tokenStr });			
+			return bluebird.resolve({ message: message, token: tokenStr, user: user});		
 		}else{
 			throw new Error("Login Failed.");
 		}
@@ -21,7 +21,7 @@ function authLogin(loginInfo){
 function queryUser(loginInfo){
 	var username= loginInfo.username;
 	var password= loginInfo.password;
-	return db.User.findOne({ username: username })
+	return db.User.findOne({ username: username }).exec()
 	.then(function(user){
 		var eUser= new Error("User "+ username+ " does not exist.");
 		eUser.status= 401;
@@ -29,10 +29,13 @@ function queryUser(loginInfo){
 		
 		var ePass= new Error("Wrong password provided for user "+ username);
 		ePass.status= 401;
-		if(!bcrypt.compareSync(password, user.password)) 
-			throw ePass;
-		
-		return bluebird.resolve({ username: username });
+		if(!bcrypt.compareSync(password, user.password)) throw ePass;
+			
+		return bluebird.resolve({ 
+			username: user.username, 
+			firstname: user.first_name, 
+			lastname: user.last_name
+		});		
 	});
 }
 

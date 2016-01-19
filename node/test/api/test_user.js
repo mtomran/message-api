@@ -1,10 +1,8 @@
 "use strict";
-/* global describe it expect*/
+/* global describe it expect chai */
 var bluebird= require("bluebird");
-//var app = "http://localhost:" + config.api.port;
-var app= require("../../app").app;
-
-var request = chai.request;
+var app = "http://localhost:" + config.api.port;
+var request= chai.request;
 //var now = Math.round(new Date().getTime() / 1000);
 
 var masterUser= {
@@ -32,6 +30,7 @@ var user2 = {
 
 
 describe("API:Route:User", function() {
+	
 	var adminToken;
 	
 	before(function() {
@@ -50,6 +49,12 @@ describe("API:Route:User", function() {
 	});
 
 	describe("User", function() {
+		
+		describe("GET /api/v1/user", function() {
+			it("Should return all users.", function() {
+				return getAllUsers(adminToken);
+			});
+		});
 		//postUser(adminToken);
 /*		describe("POST /api/v1/user", function() {
 			it("Should create a new user.", function() {
@@ -66,6 +71,20 @@ describe("API:Route:User", function() {
 	});
 });
 
+
+function getAllUsers(adminToken){
+	return request(app)
+	.get("/api/v1/user")
+	.set("x-access-token", adminToken)
+	.then(function(res) {
+		expect(res).to.have.status(200);
+		expect(res).to.be.json;
+	})
+	.catch(function(err) {
+		console.log(err.stack);
+		throw err;
+	});
+}
 
 
 function postUser(adminToken){	

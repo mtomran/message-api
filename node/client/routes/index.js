@@ -17,4 +17,4 @@ fs
 
 module.exports = {
 	router: router
-};
+}  

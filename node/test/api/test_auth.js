@@ -1,17 +1,16 @@
 "use strict";
-/* global before describe it expect chai*/
+/* global before describe it expect chai */
 
-//var app = "http://localhost:" + config.api.port;
-var app= require("../../app").app;
+var app = "http://localhost:" + config.api.port;
+var request= chai.request;
 
-var request = chai.request;
 var userTest= require("./test_user.js");
 
 var user1 = userTest.user1;
 
 var adminToken;
+
 describe("API:Route:Auth", function() {	
-	
 	
 	before(function() {
 		return userTest.loginMasterUser()

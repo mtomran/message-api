@@ -4,9 +4,8 @@ global.config = require("./config.js");
 global.utils= require("./lib/utils.js");
 global.db = require("./models")();
 
-console.log("*********", config);
 var dbUser= require("./db/db_user.js");
-
+//dbUser.addMasterUser();
 
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -19,17 +18,16 @@ var blacklist = require("express-jwt-blacklist");
 var app = exports.app = express();
 var http = require("http");
 var server = http.createServer(app);
+var path = require("path");
 
 var io = require("socket.io")(server);
 var socket = require("./lib/socket.js");
 socket.init(io);
 
-dbUser.addMasterUser()
-.then(function(){
-	server.listen(config.api.port, function () {
-		console.log("The Messaging REST API started on port " + config.api.port);
-	});	
-})
+
+server.listen(config.api.port, function () {
+	console.log("The Messaging REST API started on port " + config.api.port);
+});			
 
 
 blacklist.configure({
@@ -83,10 +81,12 @@ app.get("/api/v1/*", function (req, res, next) {
 });
 
 
-// adding the token validation middleware.
-var validatedRoutes = ["/api/v1/*"]; 
+/* 
+	Adding the token validation middleware for the REST API routes 
+ 	and private urls.
+*/	 
+var validatedRoutes = ["/api/v1/*", "/private/*", "/main"]; 
 var skippedRoutes = ["/api/v1/auth/login", "/api/v1/welcome"];
-
 app.use(validatedRoutes, exjwt({
 	secret: config.token.secret,
 	credentialsRequired: true,
@@ -95,13 +95,18 @@ app.use(validatedRoutes, exjwt({
 
 }).unless({ path: skippedRoutes }));
 
+
 app.get("/api/v1/welcome", function (req, res) {
 	var pkg= require("./package.json");	
 	res.json({ message: "Welcome to the Messaging REST API.", version: pkg.version});
 });
 
-var routes = require("./routes");
-app.use("/api/v1", routes.router);
+var apiRoutes = require("./routes");
+app.use("/api/v1", apiRoutes.router);
+
+var staticRoutes = require("./client/routes");
+app.use("/", staticRoutes.router);
+
 
 //If no route is matched by now, it must be a 404
 app.use(function (err, req, res, next) {

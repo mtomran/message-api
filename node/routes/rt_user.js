@@ -7,6 +7,22 @@ var dbUser= require("../db/db_user.js");
 
 
 /**
+ * @api {get} /user Gets all users
+ * @apiName GetUsers
+ * @apiGroup user
+ *
+ * @apiSuccess {String} message Success message.
+ * @apiSuccess {Object} data An array of all users.
+ */
+router.get("/user", function(req, res){
+	return utils.responseHandler(req, res, function(){
+		return dbUser.getAllUsers();
+	});		
+});
+
+
+
+/**
  * @api {post} /user Adds a new user
  * @apiName PostUser
  * @apiGroup user

@@ -7,11 +7,20 @@ function addMasterUser(){
 }
 
 
+function getAllUsers(){
+	return db.User.find().exec()
+	.then(function(users){
+		var successMessage= "Retrieved "+ users.length+ " user(s)";
+		console.log(successMessage);
+		return bluebird.resolve({ message: successMessage, data: users });
+	});
+}
+
 function postUser(user){
 	var userObj = new db.User(user);
 	userObj.password= bcrypt.hashSync(userObj.password, 8);
 	
-	return db.User.findOne({ username: userObj.username })
+	return db.User.findOne({ username: userObj.username }).exec()	
 	.then(function(existingUser){
 		if(existingUser) throw new Error("User already exists.");
 		
@@ -26,7 +35,7 @@ function postUser(user){
 
 
 function deleteUser(username){
-	return db.User.findOne({ username: username})
+	return db.User.findOne({ username: username}).exec()
 	.then(function(user){
 		if(!user) throw new Error("User does not exist.");
 		
@@ -40,6 +49,7 @@ function deleteUser(username){
 }
 
 module.exports= {
+	getAllUsers		: getAllUsers,
 	postUser		: postUser,
 	deleteUser		: deleteUser,
 	addMasterUser	: addMasterUser

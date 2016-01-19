@@ -6,7 +6,7 @@ var router= express.Router();
 var dbMessage= require("../db/db_message.js");
 
 router.post("/message", function (req, res){
-	var username= req.body.username;
+	var username= req.user.username;
 	var message={
 		title	: req.body.title,
 		content	: req.body.content
@@ -19,13 +19,25 @@ router.post("/message", function (req, res){
 });
 
 router.get("/message/:id", function (req, res){
-	var messgaeId= req.params.id;
-	res.json({message: "Message retrieved."});
+	var messageId= req.params.id;
+	
+	utils.responseHandler(req, res, function(){
+		return dbMessage.getMessage(messageId);
+	});
+});
+
+router.get("/message", function(req, res){
+	utils.responseHandler(req, res, function(){
+		return dbMessage.getAllMessages();
+	});
 });
 
 router.delete("/message/:id", function (req, res){
 	var messageId= req.params.id;
-	res.json({message: "Message deleted."});
+	
+	utils.responseHandler(req, res, function(){
+		return dbMessage.deleteMessage(messageId);
+	});
 });
 
 module.exports= {

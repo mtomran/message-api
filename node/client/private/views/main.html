@@ -1,0 +1,141 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="messageApp">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+	<title>Messaging RESTful API </title>
+	    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+
+</head>
+
+<body style="font-family:Verdana">
+	<div class="container" ng-controller="mainController">
+		<div class="row pull-right" ng-click="logout()">			
+			<a href="#" class="btn btn-info btn-lg">
+			<span class="glyphicon glyphicon-log-out"></span> Log out
+			</a>
+		</div>
+		<div class="row " style="padding-top:40px;">
+			<h3 class="text-center">Messaging RESTful API </h3>
+			<br />
+			<br />
+			<div class="col-md-8">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						Messages
+						<a href="#" class="pull-right" ng-click="refreshMessages()">
+							<span class="glyphicon glyphicon-refresh"></span>
+						</a>
+					</div>
+					<div class="panel-body">
+						<ul class="media-list">
+
+							<li ng-repeat="message in messages" class="media">
+
+								<div class="media-body">
+
+									<div class="media">
+										<a class="pull-right" href="#" ng-click="getMessage(message)">
+											<span class="glyphicon glyphicon-eye-open"></span>
+										</a>
+										<a class="pull-right" href="#" ng-click="deleteMessage(message._id)">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+										<div class="media-body">{{message.title}}
+											<blockquote ng-show="message.showMessage">
+												<p>{{message.content}}</p>
+												<p ng-show="message.isPalindrome" class="pull-right bg-success">Palindrome: <span class="glyphicon glyphicon-ok"></span></p>
+												<p ng-hide="message.isPalindrome" class="pull-right bg-danger">Palindrome: <span class="glyphicon glyphicon-remove"></span></p>
+												<footer>{{message._user.first_name}} {{message._user.last_name}} | {{message.date}}</footer>
+											</blockquote>
+										</div>
+									</div>
+
+								</div>
+							</li>
+							
+						</ul>
+					</div>
+					<div class="panel-footer clearfix">						
+						<div class="form-group">
+							<label for="newMessageTitle" class="col-sm-2 control-label">Title</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="newMessageTitle" name="newMessageTitle" ng-model="newTitle">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="newMessageContent" class="col-sm-2 control-label">Message</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="4" name="newMessageContent" ng-model="newContent"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-10 col-sm-offset-2">
+								<input id="sendNewMessage" type="button" value="Send" class="btn btn-primary" ng-click="sendNewMessage()">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						USERS
+					</div>
+					<div class="panel-body">
+						<ul class="media-list">
+
+							<li class="media" ng-repeat="user in users">
+
+								<div class="media-body">
+
+									<div class="media">
+										
+										<a class="pull-right" href="#">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									
+										<div class="media-body">
+											<h5>{{user.first_name}} {{user.last_name}} | {{user.username}} </h5>
+
+											<small class="text-muted">Messages Sent: {{user.messages.length}}</small>
+										</div>
+									</div>
+
+								</div>
+							</li>							
+						</ul>
+					</div>
+					<div class="panel-footer clearfix">						
+						<div class="form-group">
+							<div class="col-sm-10">
+								<input id="addNewUser" type="button" value="Add" class="btn btn-primary" ng-click="addNewUser()">
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
+	<script src="/private/scripts/main.js"></script>
+</body>
+
+</html>

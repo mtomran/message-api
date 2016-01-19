@@ -20,11 +20,9 @@ module.exports = function(){
 		config.mongo.user
 	);
 	
-	//mongoose.connect(connString, options);
+	//connString= util.format("mongodb://localhost/message");
 	
-	connString= util.format("mongodb://localhost/message");
-	mongoose.connect(connString);
-	
+	mongoose.connect(connString, options);
 	
 	
 	var fs= require("fs");
