@@ -1,5 +1,5 @@
 /**
- * Angular service for the main controller
+ * Angular controllers and services
  */
 angular.module("messageApp", [])
 .controller("mainController", ["$scope", "MainService" , function($scope, MainService) {
@@ -64,88 +64,60 @@ angular.module("messageApp", [])
 	function MainService(){}
 	
 	MainService.getAllUsers= function(){
-		return $http({
+		return serviceHelper($http, {
 			method: "GET",
 			url: "/api/v1/user"
-		})
-		.then(function(response){
-			return Promise.resolve(response.data);			
-		})
-		.catch(function(err){
-			console.log(err);
 		});
 	};
 	
 	MainService.postMessage= function(title, content){
-		return $http({
+		return serviceHelper($http, {
 			method: "POST",
 			data: { 
 				title: title, 
 				content: content 
 			},
 			url: "/api/v1/message"
-		})
-		.then(function(response){
-			return Promise.resolve(response.data);			
-		})
-		.catch(function(err){
-			console.log(err);
 		});
 	};
 	
 	MainService.deleteMessage= function(messageId){
-		return $http({
+		return serviceHelper($http, {
 			method: "DELETE",
 			url: "/api/v1/message/"+messageId
-		})
-		.then(function(response){
-			return Promise.resolve(response.data);			
-		})
-		.catch(function(err){
-			console.log(err);
 		});
 	};
 	
 	MainService.getMessage= function(messageId){
-		return $http({
+		return serviceHelper($http, {
 			method: "GET",
 			url: "/api/v1/message/"+messageId
-		})
-		.then(function(response){
-			return Promise.resolve(response.data);			
-		})
-		.catch(function(err){
-			console.log(err);
 		});
 	};
 	
 	MainService.getAllMessages= function(){
-		return $http({
+		return serviceHelper($http, {
 			method: "GET",
 			url: "/api/v1/message"
-		})
-		.then(function(response){
-			return Promise.resolve(response.data);			
-		})
-		.catch(function(err){
-			console.log(err);
 		});
 	};
 	
 	MainService.logout= function(){
-		return $http({
+		return serviceHelper($http, {
 			method: "POST",
 			url: "/api/v1/auth/logout"
-		})
-		.then(function(response){
-			console.log(response.data.message);
-			return Promise.resolve(response.data);
-		})
-		.catch(function(err){
-			console.log(err);
 		});
 	};
 	
 	return MainService;
 }]);
 
+function serviceHelper($http, options){	
+	return $http(options)
+	.then(function(response){
+		return Promise.resolve(response.data);			
+	})
+	.catch(function(err){
+		console.log(err);
+	});
+}
