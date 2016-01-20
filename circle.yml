@@ -1,7 +1,4 @@
 machine:
-  hosts:
-    mongodb: 172.17.42.1
-    redis: 172.17.42.1
   node:
     version: 0.12.7
   services:
