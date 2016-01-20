@@ -24,6 +24,7 @@ module.exports = function(){
 		connString= util.format("mongodb://"+ config.mongo.host+ "/message");
 	}
 	
+	console.log(process.env.NODE_ENV, connString);
 	
 	mongoose.connect(connString);
 	
