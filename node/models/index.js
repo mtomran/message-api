@@ -20,7 +20,7 @@ module.exports = function(){
 		config.mongo.user
 	);
 	
-	connString= util.format("mongodb://localhost/message");
+	connString= util.format("mongodb://172.17.42.1/message");
 	
 	mongoose.connect(connString);
 	
