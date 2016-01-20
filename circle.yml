@@ -6,6 +6,7 @@ machine:
     version: 0.12.7
   services:
     - docker
+    
 
 dependencies:
   override:
