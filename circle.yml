@@ -8,5 +8,5 @@ dependencies:
 
 test:
   override:
-    - docker-compose run -d --no-deps node
+    - cd node; docker-compose run -d --no-deps node
     - npm test
