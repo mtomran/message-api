@@ -1,1 +1,1 @@
-# message-api
+# Messageing RESTful API
