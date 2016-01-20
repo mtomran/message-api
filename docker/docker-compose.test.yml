@@ -1,8 +1,8 @@
 node_test:
   build: ../node/
-  dockerfile: Dockerfile.test
+  ports:
+    - "8000:8000"
   extra_hosts: 
-    - "mongodb:localhost"
-    - "redis:localhost"   
+    - "mongodb:172.17.42.1"
+    - "redis:172.17.42.1"   
   restart: always
-  

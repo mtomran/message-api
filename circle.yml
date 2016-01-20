@@ -1,7 +1,7 @@
 machine:
   hosts:
-    mongodb: 127.0.0.1
-    redis: 127.0.0.1
+    mongodb: 172.17.42.1
+    redis: 172.17.42.1
   node:
     version: 0.12.7
   services:
@@ -10,10 +10,10 @@ machine:
 dependencies:
   override:
     - sudo pip install --upgrade docker-compose
-    - cd docker; docker-compose build
+    - cd docker; docker-compose -f docker-compose.test.yml build
     - cd node; npm install
 test:
   override:
-    - cd docker; docker-compose up -d --no-deps node
+    - cd docker; docker-compose -f docker-compose.test.yml up -d
     - cd node; npm test
   
