@@ -1,4 +1,6 @@
 node_test:
+  environment:
+    - NODE_ENV=test
   build: ../node/
   ports:
     - "8000:8000"
