@@ -1,6 +1,12 @@
 "use strict";
 /* global before describe it expect chai */
 
+/**
+ * Authentication module tests
+ *  
+ * @module 
+ */
+
 var app = "http://localhost:" + config.api.port;
 var request= chai.request;
 
@@ -20,13 +26,7 @@ describe("API:Route:Auth", function() {
 	});
 
 	describe("Auth", function() {
-/*
-		describe("POST /api/v1/user", function() {
-			it("Should create a new user.", function() {
-				return userTest.postUser(adminToken);
-			});
-		});
-*/		
+
 		describe("POST /api/v1/auth/login", function() {
 			it("Should login successfully.", function() {
 				return postLogin();		
@@ -44,13 +44,7 @@ describe("API:Route:Auth", function() {
 				return postLoginWrongPassword();
 			});
 		});
-/*		
-		describe("DELETE /api/v1/user/:username", function() {
-			it("Should delete the given user.", function() {
-				return userTest.deleteUser(adminToken);
-			});
-		});
-*/		
+	
 		describe("POST /api/v1/auth/logout", function() {
 			it("Should fail to logout if a valid token is not provided.", function() {
 				return postLogoutNoToken();
@@ -72,6 +66,10 @@ describe("API:Route:Auth", function() {
 });
 
 
+
+/**
+ * Test for login with user1
+ */
 function postLogin(){
 	return request(app)
 	.post("/api/v1/auth/login")
@@ -92,6 +90,10 @@ function postLogin(){
 }
 
 
+
+/**
+ * Test for failing upon trying to login with wrong username
+ */
 function postLoginWrongUser(){
 	return request(app)
 	.post("/api/v1/auth/login")
@@ -108,6 +110,10 @@ function postLoginWrongUser(){
 }
 
 
+
+/**
+ * Test for failing upon trying to login with wrong password
+ */
 function postLoginWrongPassword(){
 	return request(app)
 	.post("/api/v1/auth/login")
@@ -123,6 +129,11 @@ function postLoginWrongPassword(){
 	});
 }
 
+
+
+/**
+ * Test for a successful logout of user1
+ */
 function postLogout(){
 	return request(app)
 	.post("/api/v1/auth/logout")			
@@ -140,6 +151,10 @@ function postLogout(){
 }
 
 
+
+/**
+ * Test for failing to logout upon providing an invalid token
+ */
 function postLogoutNoToken(){
 	return request(app)
 	.post("/api/v1/auth/logout")			
@@ -155,6 +170,12 @@ function postLogoutNoToken(){
 	});
 }
 
+
+
+/**
+ * Test to confirm that user can not access routes such as /logout
+ * after they already logged out of the platform.
+ */
 function postLogoutBlacklisted(){
 	return request(app)
 	.post("/api/v1/auth/logout")			
