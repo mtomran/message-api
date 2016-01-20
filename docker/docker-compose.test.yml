@@ -1,0 +1,8 @@
+node_test:
+  build: ../node/
+  dockerfile: Dockerfile.test
+  extra_hosts: 
+    - "mongodb:localhost"
+    - "redis:localhost"   
+  restart: always
+  
