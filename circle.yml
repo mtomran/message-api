@@ -1,13 +1,12 @@
 machine:
-  hosts:
-    mongodb: 127.0.0.1
-    redis: 127.0.0.1
-  node:
-    version: 0.12.7
-      
+  services:
+    - docker
+
 dependencies:
   override:
-    - cd node; npm install
+    - sudo pip install --upgrade docker-compose==1.3.3
+
 test:
   override:
-    - cd node; npm test
+    - docker-compose run -d --no-deps node
+    - npm test
