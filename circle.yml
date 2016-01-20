@@ -14,4 +14,10 @@ test:
   override:
     - cd docker; docker-compose -f docker-compose.test.yml up -d; sleep 5
     - cd node; npm test
+    
+deployment:
+  dockerhub:
+    branch: master
+    commands:
+      - $TRIGGER_DOCKER_HUB_BUILD
   
