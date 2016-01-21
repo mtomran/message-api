@@ -1,3 +1,9 @@
+/**
+ * Application utility functions
+ * 
+ * @module
+ */
+
 var bluebird= require("bluebird");
 
 /**

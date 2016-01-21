@@ -1,5 +1,5 @@
 /* global __dirname */
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 var fs = require("fs");
@@ -12,9 +12,9 @@ fs
 		if (file == "index.js" || path.extname(file)!=".js") return;
 
 		var rt = require("./" + file).router;
-		router.use('/', rt);
+		router.use("/", rt);
 	});
 
 module.exports = {
 	router: router
-}  
+};
