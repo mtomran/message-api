@@ -18,7 +18,6 @@ module.exports = function(grunt) {
 		}
 	});
 
-	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks("grunt-apidoc");
 	grunt.loadNpmTasks("grunt-jsdoc");
 

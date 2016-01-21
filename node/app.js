@@ -18,12 +18,6 @@ var blacklist = require("express-jwt-blacklist");
 var app = exports.app = express();
 var http = require("http");
 var server = http.createServer(app);
-var path = require("path");
-
-var io = require("socket.io")(server);
-var socket = require("./lib/socket.js");
-socket.init(io);
-
 
 server.listen(config.api.port, function () {
 	console.log("The Messaging REST API started on port " + config.api.port);
@@ -92,14 +86,7 @@ app.use(validatedRoutes, exjwt({
 	credentialsRequired: true,
 	isRevoked: blacklist.isRevoked,
 	getToken: token.getToken
-
 }).unless({ path: skippedRoutes }));
-
-
-app.get("/api/v1/welcome", function (req, res) {
-	var pkg= require("./package.json");	
-	res.json({ message: "Welcome to the Messaging REST API.", version: pkg.version});
-});
 
 var apiRoutes = require("./routes");
 app.use("/api/v1", apiRoutes.router);

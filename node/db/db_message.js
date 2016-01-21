@@ -1,9 +1,23 @@
 /* global db */
+
+/**
+ * DB Mechanics for Message module
+ * 
+ * @module
+ */
+
 var bluebird= require("bluebird");
 var mongoose= require("mongoose");
 var _= require("lodash");
 
 
+
+/**
+ * Stores a new message into the DB
+ * 
+ * @param {String} username Sender's username
+ * @param {Object} message An object containing the title and the content of the message
+ */
 function postMessage(username, message){	
 	return db.User.findOne({ username: username }).exec().bind({})
 	.then(function(user){		
@@ -28,6 +42,12 @@ function postMessage(username, message){
 }
 
 
+
+/**
+ * Gets a message by ID
+ * 
+ * @param {String} messageId Message ID  
+ */
 function getMessage(messageId){
 	var messageIdObj= mongoose.Types.ObjectId(messageId);
 	return db.Message.findOne({ _id: messageIdObj })
@@ -47,6 +67,10 @@ function getMessage(messageId){
 }
 
 
+
+/**
+ * Gets messages from the DB
+ */
 function getAllMessages(){
 	return db.Message.find()
 	.populate("_user")
@@ -59,6 +83,12 @@ function getAllMessages(){
 }
 
 
+
+/**
+ * Deletes a message by ID
+ * 
+ * @param {String} messageId Message ID 
+ */
 function deleteMessage(messageId){
 	return getMessage(messageId)
 	.tap(function(result){
@@ -78,6 +108,12 @@ function deleteMessage(messageId){
 	});
 }
 
+
+/**
+ * Checks if a given string is Palindrome
+ * 
+ * @param {String} str Input string
+ */
 function checkPalindrome(str) {
 	return str == str.toLowerCase().split("").reverse().join("");
 }

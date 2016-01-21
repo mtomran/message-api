@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Messaging API Sign In</title>
 
+    <style>
+      [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+      }
+    </style>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     
@@ -22,8 +27,7 @@
     <script src="/public/scripts/ie-emulation-modes-warning.js"></script>    
   </head>
 
-  <body>
-
+  <body ng-cloak>
     <div class="container" ng-controller="loginController">
       <form id="signinForm" class="form-signin" ng-submit="signIn()">
         <h2 class="form-signin-heading">Please sign in</h2>
