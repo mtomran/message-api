@@ -11,6 +11,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
 	<title>Messaging RESTful API </title>
+	
+	<style>
+      [ng\:cloak], [ng-cloak], .ng-cloak {
+        display: none !important;
+      }
+    </style>
+	
 	    <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     
@@ -20,7 +27,7 @@
 
 </head>
 
-<body style="font-family:Verdana">
+<body style="font-family:Verdana" ng-cloak>
 	<div class="container" ng-controller="mainController">
 		<div class="row pull-right" ng-click="logout()">			
 			<a href="#" class="btn btn-info btn-lg">
