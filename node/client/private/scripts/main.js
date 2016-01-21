@@ -3,6 +3,8 @@
  */
 angular.module("messageApp", [])
 .controller("mainController", ["$scope", "MainService" , function($scope, MainService) {
+	$scope.showUserError= false;
+	
 	$scope.refreshMessages= function(){
 		MainService.getAllMessages()
 		.then(function(messages){			
@@ -38,10 +40,15 @@ angular.module("messageApp", [])
 	$scope.addNewUser= function(){
 		MainService.postUser($scope.newUsername, $scope.newPassword, $scope.newFirstName, $scope.newLastName)
 		.then(function(response){
+			console.log(response);
 			var user= response.data;
 			$scope.users.push(user);
 			$scope.cancelUser();
-			console.log(response);
+			
+		})
+		.catch(function(err){
+			$scope.userErrorMessage= err.data;
+			$scope.showUserError= true;
 		});
 	};
 	
@@ -50,8 +57,9 @@ angular.module("messageApp", [])
 		$scope.newPassword= "";
 		$scope.newFirstName= "";
 		$scope.newLastName= "";
+		$scope.showUserError= false;
 		$scope.showNewUser= !$scope.showNewUser;
-	}
+	};
 	
 	$scope.getMessage= function(message){
 		MainService.getMessage(message._id)
@@ -174,5 +182,6 @@ function serviceHelper($http, options){
 	})
 	.catch(function(err){
 		console.log(err);
+		return Promise.reject(err);
 	});
 }

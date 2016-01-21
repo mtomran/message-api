@@ -78,6 +78,12 @@ describe("API:Route:User", function() {
 			it("Should delete the given user.", function() {
 				return deleteUser(adminToken, user2);
 			});
+		});		
+		
+		describe("DELETE /api/v1/user/:username", function() {
+			it("Should fail to delete the master user.", function() {
+				return deleteMasterUser(adminToken);
+			});
 		});
 		
 		describe("DELETE /api/v1/user/:username", function() {
@@ -197,6 +203,28 @@ function deleteUser(adminToken, user){
 	.set("x-access-token", adminToken)
 	.then(function(res) {
 		expect(res).to.have.status(200);
+		expect(res).to.be.json;
+	})
+	.catch(function(err) {
+		console.log(err.stack);
+		throw err;
+	});
+}
+
+
+
+/**
+ * Test for failing upon deleting the master user.
+ * 
+ * @param {string} adminToken a token assigned to user admin 
+ * @param {object} user the user object to be deleted
+ */
+function deleteMasterUser(adminToken){	
+	return request(app)
+	.delete("/api/v1/user/" + masterUser.username)
+	.set("x-access-token", adminToken)
+	.then(function(res) {
+		expect(res).to.have.status(500);
 		expect(res).to.be.json;
 	})
 	.catch(function(err) {

@@ -13,7 +13,10 @@ var router= express.Router();
  * @api {post} /auth/login Login to the platform
  * @apiName PostAuthLogin
  * @apiGroup auth
- *
+ * 
+ * @apiParam {String} username Login name of the user.
+ * @apiParam {String} password Password of the user.
+ * @apiSuccess {String} user Information about the logged in user.
  * @apiSuccess {String} token Generated Jason Web Token.
  * @apiSuccess {String} message Success message.
  */

@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 					destination: "jsdoc"
 				}
 			}
-		},
+		}
 	});
 
 	// Load the plugin that provides the "uglify" task.

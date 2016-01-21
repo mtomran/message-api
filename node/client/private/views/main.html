@@ -41,11 +41,8 @@
 					</div>
 					<div class="panel-body">
 						<ul class="media-list">
-
 							<li ng-repeat="message in messages" class="media">
-
 								<div class="media-body">
-
 									<div class="media">
 										<a class="pull-right" href="#" ng-click="getMessage(message)">
 											<span class="glyphicon glyphicon-eye-open"></span>
@@ -64,35 +61,36 @@
 									</div>
 
 								</div>
-							</li>
-							
+							</li>							
 						</ul>
 					</div>
-					<div class="panel-footer clearfix">						
-						<div class="form-group">
-							<label for="newMessageTitle" class="col-sm-2 control-label">Title</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="newMessageTitle" name="newMessageTitle" ng-model="newTitle">
+					<div class="panel-footer clearfix">
+						<form ng-submit="sendNewMessage()">						
+							<div class="form-group">
+								<label for="newMessageTitle" class="col-sm-2 control-label">Title</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="newMessageTitle" name="newMessageTitle" required ng-model="newTitle">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="newMessageContent" class="col-sm-2 control-label">Message</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" rows="4" name="newMessageContent" ng-model="newContent"></textarea>
+							<div class="form-group">
+								<label for="newMessageContent" class="col-sm-2 control-label">Message</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" rows="4" name="newMessageContent" required ng-model="newContent"></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-10 col-sm-offset-2">
-								<input id="sendNewMessage" type="button" value="Send" class="btn btn-primary" ng-click="sendNewMessage()">
+							<div class="form-group">
+								<div class="col-sm-10 col-sm-offset-2">
+									<input id="sendNewMessage" type="submit" value="Send" class="btn btn-primary">
+								</div>
 							</div>
-						</div>
+						</form>	
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						USERS
+						Users
 						<a href="#" class="pull-right" ng-click="refreshUsers()">
 							<span class="glyphicon glyphicon-refresh"></span>
 						</a>
@@ -106,7 +104,7 @@
 
 									<div class="media">
 										
-										<a class="pull-right" href="#" ng-click="deleteUser(user)">
+										<a class="pull-right" href="#" ng-show="user.username != 'admin'" ng-click="deleteUser(user)">
 											<span class="glyphicon glyphicon-trash"></span>
 										</a>
 									
@@ -127,29 +125,33 @@
 								<input type="button" value="Add New User" class="btn btn-primary" ng-hide="showNewUser" ng-click="showNewUser= !showNewUser">
 							</div>
 						</div>
-
-						<div class="form-group" ng-show="showNewUser">
-							<div class="col-xs-8">
-								<label for="firstname">First Name</label>
-								<input class="form-control" id="firstname" type="text" ng-model="newFirstName">
+						<form ng-submit="addNewUser()()">	
+							<div class="form-group" ng-show="showNewUser">
+								<div class="col-xs-8">
+									<label for="firstname">First Name</label>
+									<input class="form-control" id="firstname" type="text" required ng-model="newFirstName">
+								</div>
+								<div class="col-xs-8">
+									<label for="lastname">Last Name</label>
+									<input class="form-control" id="lastname" type="text" required ng-model="newLastName">
+								</div>
+								<div class="col-xs-8">
+									<label for="username">Login Name</label>
+									<input class="form-control" id="username" type="text" required ng-model="newUsername">
+								</div>
+								<div class="col-xs-8">
+									<label for="password">password</label>
+									<input class="form-control" id="username" type="password" required ng-model="newPassword">
+								</div>
+								<div class="col-xs-8 alert alert-danger" ng-show="showUserError">
+									<strong>Error!</strong> {{userErrorMessage}}
+								</div>
+								<div class="col-sm-10">
+									<input type="submit" value="Add" class="btn btn-primary">
+									<input type="button" value="Cancel" class="btn" ng-click="cancelUser()">
+								</div>								
 							</div>
-							<div class="col-xs-8">
-								<label for="lastname">Last Name</label>
-								<input class="form-control" id="lastname" type="text" ng-model="newLastName">
-							</div>
-							<div class="col-xs-8">
-								<label for="username">Login Name</label>
-								<input class="form-control" id="username" type="text" ng-model="newUsername">
-							</div>
-							<div class="col-xs-8">
-								<label for="password">password</label>
-								<input class="form-control" id="username" type="password" ng-model="newPassword">
-							</div>
-							<div class="col-sm-10">
-								<input type="button" value="Add" class="btn btn-primary" ng-click="addNewUser()">
-								<input type="button" value="Cancel" class="btn" ng-click="cancelUser()">
-							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 
