@@ -10,6 +10,13 @@ angular.module("messageApp", [])
 		});
 	};
 	
+	$scope.refreshUsers= function(){
+		MainService.getAllUsers()
+		.then(function(users){			
+			$scope.users= users.data;
+		});
+	};
+	
 	$scope.logout= function(){		
 		MainService.logout()
 		.then(function(response){
@@ -146,7 +153,7 @@ angular.module("messageApp", [])
 	MainService.deleteUser= function(user){
 		return serviceHelper($http, {
 			method: "DELETE",
-			url: "/api/v1/user/"+user._id
+			url: "/api/v1/user/"+user.username
 		});
 	};
 	
