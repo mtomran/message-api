@@ -6,6 +6,7 @@ var router= express.Router();
 var dbUser= require("../db/db_user.js");
 
 
+
 /**
  * @api {get} /user Gets all users
  * @apiName GetUsers
@@ -26,8 +27,14 @@ router.get("/user", function(req, res){
  * @api {post} /user Adds a new user
  * @apiName PostUser
  * @apiGroup user
- *
+ *  
+ * @apiParam {String} username Username of the new user.
+ * @apiParam {String} password Password of the new user.
+ * @apiParam {String} firest_name First name of the new user.
+ * @apiParam {String} last_name Last name of the new user.
  * @apiSuccess {String} message Success message.
+ * @apiSuccess {Object} data Information of the added user.
+ * 
  */
 router.post("/user", function(req, res){
 	var user= { 
@@ -44,14 +51,14 @@ router.post("/user", function(req, res){
 
 
 
-
 /**
- * @api {post} /user removes a user
+ * @api {delete} /user/:username Removes a user
  * @apiName DeleteUser
  * @apiGroup user
  *
- * @param {Number} username user's login name
+ * @apiParam {String} username user's login name
  * @apiSuccess {String} message Success message.
+ * @apiSuccess {Object} data Information about the deleted user.
  */
 router.delete("/user/:username", function (req, res){
 	var username= req.params.username;

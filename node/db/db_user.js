@@ -7,7 +7,7 @@ function addMasterUser(){
 }
 
 
-function getAllUsers(){
+function getAllUsers(){	
 	return db.User.find().exec()
 	.then(function(users){
 		var successMessage= "Retrieved "+ users.length+ " user(s)";
@@ -35,6 +35,7 @@ function postUser(user){
 
 
 function deleteUser(username){
+	if (username == "admin") throw new Error("Cannot remove the master user.");
 	return db.User.findOne({ username: username}).exec()
 	.then(function(user){
 		if(!user) throw new Error("User does not exist.");

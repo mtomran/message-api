@@ -32,6 +32,12 @@ The application source code is on GitHub and is accessible at
 https://github.com/mtomran/message-api
 
 
+## APIDOC 
+The APIDOC of the RESTful API is availabe [here](http://node.message-api.mtomran2.svc.tutum.io/apidoc/).
+
+## JSDoc
+Javascript documentation is available [here](http://node.message-api.mtomran2.svc.tutum.io/jsdoc/)
+
 ## Core Technologies
 The core technologies used in this application are the following.
 
