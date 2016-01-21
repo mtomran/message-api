@@ -10,6 +10,13 @@ angular.module("messageApp", [])
 		});
 	};
 	
+	$scope.refreshUsers= function(){
+		MainService.getAllUsers()
+		.then(function(users){			
+			$scope.users= users.data;
+		});
+	};
+	
 	$scope.logout= function(){		
 		MainService.logout()
 		.then(function(response){
@@ -27,6 +34,24 @@ angular.module("messageApp", [])
 			console.log(response);
 		});
 	};
+	
+	$scope.addNewUser= function(){
+		MainService.postUser($scope.newUsername, $scope.newPassword, $scope.newFirstName, $scope.newLastName)
+		.then(function(response){
+			var user= response.data;
+			$scope.users.push(user);
+			$scope.cancelUser();
+			console.log(response);
+		});
+	};
+	
+	$scope.cancelUser= function(){
+		$scope.newUsername= "";
+		$scope.newPassword= "";
+		$scope.newFirstName= "";
+		$scope.newLastName= "";
+		$scope.showNewUser= !$scope.showNewUser;
+	}
 	
 	$scope.getMessage= function(message){
 		MainService.getMessage(message._id)
@@ -48,11 +73,21 @@ angular.module("messageApp", [])
 		});	
 	};
 	
+	$scope.deleteUser= function(deleteUser){
+		MainService.deleteUser(deleteUser)
+		.then(function(response){
+			console.log(response);
+			return _.remove($scope.users, function(user){				
+				return (deleteUser._id == user._id);
+			});
+		});	
+	};
+	
 	MainService.getAllUsers()
 	.then(function(users){
 		console.log(users);
 		$scope.users= users.data;
-	});	
+	});
 	
 	MainService.getAllMessages()
 	.then(function(messages){		
@@ -99,6 +134,26 @@ angular.module("messageApp", [])
 		return serviceHelper($http, {
 			method: "GET",
 			url: "/api/v1/message"
+		});
+	};
+	
+	MainService.postUser= function(username, password, first_name, last_name){
+		return serviceHelper($http, {
+			method: "POST",
+			data: { 
+				username: username, 
+				password: password,
+				first_name: first_name,
+				last_name: last_name 
+			},
+			url: "/api/v1/user"
+		});
+	};
+	
+	MainService.deleteUser= function(user){
+		return serviceHelper($http, {
+			method: "DELETE",
+			url: "/api/v1/user/"+user.username
 		});
 	};
 	
