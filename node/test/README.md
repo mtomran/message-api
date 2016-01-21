@@ -7,6 +7,7 @@ The following packages are used for running various typse of tests within the pl
 	- [chai](http://chaijs.com/): a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework
 		- [chai-http](http://chaijs.com/plugins/chai-http): HTTP integration testing with Chai assertions.
 		- [chai-as-promised](chai-as-promised): extends Chai with a fluent language for asserting facts about promises.
+	- [Zombie](http://zombie.js.org/): fast, full-stack, headless browser testing using node.js
 
 ## Running
 With npm:

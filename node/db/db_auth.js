@@ -1,9 +1,22 @@
 /* global db */
 
+/**
+ * DB Mechanics for Authentication module
+ * 
+ * @module
+ */
+
 var bluebird= require("bluebird");
 var token= require("../lib/token.js");
 var bcrypt= require("bcrypt");
 
+
+
+/**
+ * Authenticates a user login
+ * 
+ * @param {Object} loginInfo An object containing user's username and password
+ */
 function authLogin(loginInfo){
 	return queryUser(loginInfo)	
 	.then(function(user){
@@ -18,6 +31,13 @@ function authLogin(loginInfo){
 	});
 }
 
+
+
+/**
+ * Query the DB to retrieve the requested user.
+ * 
+ * @param {Object} loginInfo An object containing user's username and password
+ */
 function queryUser(loginInfo){
 	var username= loginInfo.username;
 	var password= loginInfo.password;
