@@ -1,30 +1,39 @@
-$(document).ready(function(){
-	$("#signinForm").submit(function(e){
-		e.preventDefault();
-		
-		var username= $("#inputUsername").val();
-		var password= $("#inputPassword").val();
-		login(username, password);
-	});
-});
+/* global angular window */
 
-function login(username, password){
+/**
+ * Angular controller
+ */
+angular.module("messageApp", [])
+.controller("loginController", ["$scope", "$http" , function($scope, $http) {
+	$scope.showError= false;
+	
+	$scope.signIn= function(){
+		login($http, $scope);
+	};
+}]);
+
+function login($http, $scope){
 	var loginData= {
-		username: username,
-		password: password
+		username: $scope.username, 
+		password: $scope.password
 	};
 	
-	return $.ajax({
+	return $http({
 		data 	: loginData,
-		type 	: "post",
-		url		: "/api/v1/auth/login",
-		success	: function(data){
-			console.log(data.message);
-			
-			if(data.token){
-				window.location.replace("/main");
-				window.localStorage.setItem("user", data.user);
-			}
+		method 	: "post",
+		url		: "/api/v1/auth/login"		
+	})
+	.then(function(response){
+		var data= response.data;
+		console.log(data.message);
+		
+		if(data.token){
+			window.location.replace("/main");
+			window.localStorage.setItem("user", data.user);
 		}
+	})
+	.catch(function(err){
+		console.log(err);
+		$scope.showError= true;
 	});
 }

@@ -24,9 +24,9 @@ var responseHandler = function (req, res, dbFunc, socketFunc) {
 	})
 	.catch(function (err) {	
 		console.log("Request Failed.", err.stack);
-		var status = err.status || 500;
+		var status = err.status || 500;		
 		res.status(status);		
-		res.json(err);
+		res.json(err.message);
 	});
 };
 
