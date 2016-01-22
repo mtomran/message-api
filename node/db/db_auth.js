@@ -53,8 +53,8 @@ function queryUser(loginInfo){
 			
 		return bluebird.resolve({ 
 			username: user.username, 
-			firstname: user.first_name, 
-			lastname: user.last_name
+			first_name: user.first_name, 
+			last_name: user.last_name
 		});		
 	});
 }
