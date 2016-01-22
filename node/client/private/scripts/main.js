@@ -4,6 +4,7 @@
 angular.module("messageApp", [])
 .controller("mainController", ["$scope", "MainService" , function($scope, MainService) {
 	$scope.showUserError= false;
+	$scope.login= window.localStorage.getItem("user");
 	
 	$scope.refreshMessages= function(){
 		MainService.getAllMessages()

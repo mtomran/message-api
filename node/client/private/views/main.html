@@ -29,9 +29,12 @@
 
 <body style="font-family:Verdana" ng-cloak>
 	<div class="container" ng-controller="mainController">
+		<div class="row pull-left">
+			<p class="text-muted">Login: {{login}}</p>		
+		</div>
 		<div class="row pull-right" ng-click="logout()">			
 			<a href="#" class="btn btn-info btn-lg">
-			<span class="glyphicon glyphicon-log-out"></span> Log out
+				<span class="glyphicon glyphicon-log-out"></span> Log out
 			</a>
 		</div>
 		<div class="row " style="padding-top:40px;">

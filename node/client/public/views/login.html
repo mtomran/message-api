@@ -30,17 +30,18 @@
   <body ng-cloak>
     <div class="container" ng-controller="loginController">
       <form id="signinForm" class="form-signin" ng-submit="signIn()">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        
+        <h2 class="form-signin-heading">Sign in</h2>
         <label for="inputUsername" class="sr-only">Username</label>
         <input type="text" id="inputUsername"  class="form-control" placeholder="Username" required autofocus ng-model="username">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="password">
-        <div class="checkbox">
-          <div class="alert alert-danger" ng-show="showError">
-            <strong>Error!</strong> Invalid username/password.
-          </div>
-        </div>
+        
+        <div class="alert alert-danger" ng-show="showError">
+          <strong>Error!</strong> Invalid username/password.
+        </div>        
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="pull-right text-muted">version: {{version}}</p>
       </form>
     </div>
 

@@ -10,6 +10,17 @@ angular.module("messageApp", [])
 	$scope.signIn= function(){
 		login($http, $scope);
 	};
+	
+	$http({
+		method 	: "get",
+		url		: "/api/v1/welcome"	
+	})
+	.then(function(response){
+		var data= response.data;
+		console.log(data.message);
+		
+		$scope.version= data.version;
+	});
 }]);
 
 function login($http, $scope){
@@ -29,7 +40,7 @@ function login($http, $scope){
 		
 		if(data.token){
 			window.location.replace("/main");
-			window.localStorage.setItem("user", data.user);
+			window.localStorage.setItem("user", data.user.first_name+ " "+ data.user.last_name+ " ("+data.user.username +")");
 		}
 	})
 	.catch(function(err){
